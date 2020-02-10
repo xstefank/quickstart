@@ -408,6 +408,7 @@
                 <module>mail</module>
                 <module>managed-executor-service</module>
                 <module>messaging-clustering-singleton</module>
+                <module>microprofile-rest-client</module>
                 <module>numberguess</module>
                 <module>payment-cdi-event</module>
                 <module>resteasy-jaxrs-client</module>
