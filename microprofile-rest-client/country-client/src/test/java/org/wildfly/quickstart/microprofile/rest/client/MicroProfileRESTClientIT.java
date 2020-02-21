@@ -29,6 +29,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.wildfly.quickstart.microprofile.rest.client.api.CountryProviderResource;
+import org.wildfly.quickstart.microprofile.rest.client.model.Country;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -80,7 +82,7 @@ public class MicroProfileRESTClientIT {
     @Deployment(name = COUNTRY_SERVER, order = 1)
     public static WebArchive createServerDeployment() {
         return ShrinkWrap.create(WebArchive.class, COUNTRY_SERVER + ".war")
-            .addPackages(false, org.wildfly.quickstart.microprofile.JaxRsApplication.class.getPackage())
+            .addClasses(org.wildfly.quickstart.microprofile.rest.client.api.JaxRsApplication.class, CountryProviderResource.class, Country.class)
             // enable CDI
             .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }

@@ -1,4 +1,6 @@
-package org.wildfly.quickstart.microprofile;
+package org.wildfly.quickstart.microprofile.rest.client.api;
+
+import org.wildfly.quickstart.microprofile.rest.client.model.Country;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
@@ -17,12 +19,7 @@ public class CountryProviderResource {
     private static final Map<String, Country> countries = new HashMap<>();
 
     public CountryProviderResource() {
-        countries.put("Czechia", new Country("Czechia", "Prague", "CZK"));
         countries.put("France", new Country("France", "Paris", "EUR"));
-        countries.put("Slovakia", new Country("Slovakia", "Bratislava", "EUR"));
-        countries.put("Switzerland", new Country("Switzerland", "Bern", "CHF"));
-        countries.put("Netherlands", new Country("Netherlands", "Amsterdam", "EUR"));
-        countries.put("USA", new Country("USA", "Washington, D.C.", "USD"));
     }
 
     @GET
