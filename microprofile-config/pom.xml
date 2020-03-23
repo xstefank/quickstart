@@ -1,16 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.wildfly.quickstarts</groupId>
-    <artifactId>quickstart-parent</artifactId>
-    <!--
-    Maintain separation between the artifact id and the version to help prevent
-    merge conflicts between commits changing the GA and those changing the V.
-    -->
-    <version>19.0.0.Final</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
+
+  <groupId>org.wildfly.quickstarts</groupId>
+  <version>19.0.0.Final</version>
 
   <artifactId>microprofile-config</artifactId>
   <packaging>war</packaging>
@@ -22,6 +15,19 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <!-- importing the microprofile BOM adds MicroProfile specs -->
+      <dependency>
+        <groupId>org.wildfly.bom</groupId>
+        <artifactId>wildfly-microprofile</artifactId>
+        <version>19.0.0.Final</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
   <dependencies>
     <!-- Import the MicroProfile Config API, we use provided scope as the API is included in WildFly -->
     <dependency>
@@ -42,34 +48,18 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Needed for running tests (you may also use TestNG) -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <!-- Arquillian allows you to test enterprise code such as EJBs and
-           Transactional(JTA) JPA from JUnit/TestNG -->
-    <dependency>
-      <groupId>org.jboss.arquillian.junit</groupId>
-      <artifactId>arquillian-junit-container</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.resteasy</groupId>
-      <artifactId>resteasy-client</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.2</version>
-      <scope>test</scope>
-    </dependency>
+    
   </dependencies>
 
   <build>
     <!-- Set the name of the archive -->
     <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <!-- Allows to use mvn wildfly:deploy -->
+      <plugin>
+        <groupId>org.wildfly.plugins</groupId>
+        <artifactId>wildfly-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
 </project>
