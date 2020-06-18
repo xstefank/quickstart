@@ -1,0 +1,17 @@
+#!/bin/bash
+
+sleep 100
+
+# RHEL7 image doesn't have Maven on PATH by default
+PATH=/opt/rh/rh-maven35/root/usr/bin/:$PATH
+
+CONTEXT_DIR=$SOURCE_CONTEXT_DIR
+
+echo $CONTEXT_DIR
+echo $SOURCE_CONTEXT_DIR
+
+cd ..
+mvn -B install
+
+cd $CONTEXT_DIR
+
