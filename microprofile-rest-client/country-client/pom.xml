@@ -2,19 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <groupId>org.wildfly.quickstarts</groupId>
-    <artifactId>quickstart-parent</artifactId>
-    <!--
-    Maintain separation between the artifact id and the version to help prevent
-    merge conflicts between commits changing the GA and those changing the V.
-    -->
-    <version>19.0.0.Beta2</version>
-    <relativePath>../../pom.xml</relativePath>
-  </parent>
+<!--  <parent>-->
+<!--    <groupId>org.wildfly.quickstarts</groupId>-->
+<!--    <artifactId>quickstart-parent</artifactId>-->
+<!--    &lt;!&ndash;-->
+<!--    Maintain separation between the artifact id and the version to help prevent-->
+<!--    merge conflicts between commits changing the GA and those changing the V.-->
+<!--    &ndash;&gt;-->
+<!--    <version>19.0.0.Beta2</version>-->
+<!--    <relativePath>../../pom.xml</relativePath>-->
+<!--  </parent>-->
   <modelVersion>4.0.0</modelVersion>
 
+  <groupId>org.wildfly.quickstarts</groupId>
   <artifactId>country-client</artifactId>
+  <version>19.0.0.Beta2</version>
   <packaging>war</packaging>
 
   <name>Quickstart: microprofile-rest-client/country-client</name>
@@ -24,6 +26,20 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <failOnMissingWebXml>false</failOnMissingWebXml>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- importing the jakartaee8-with-tools BOM adds specs and other useful artifacts as managed dependencies -->
+      <dependency>
+        <groupId>org.wildfly.bom</groupId>
+        <artifactId>wildfly-jakartaee8-with-tools</artifactId>
+        <version>19.0.0.Beta2</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
 
   <dependencies>
     <!-- Import the MicroProfile REST Client API, we use provided scope as the API is included in WildFly -->
