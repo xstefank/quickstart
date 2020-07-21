@@ -7,7 +7,6 @@ import org.wildfly.quickstarts.microprofile.rest.client.model.Country;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -28,11 +27,15 @@ public class CountriesResource {
     @Path("/cdi/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public Country cdiName(@PathParam("name") String name) {
-        try {
-            return countriesServiceClient.getByName(name);
-        } catch (NotFoundException e) {
-            return null;
-        }
+        System.out.println("AAAAAAAAAAAAAAAAAa " + name);
+//        try {
+        Country byName = countriesServiceClient.getByName(name);
+        System.out.println("XXXXXXXXXXXXXXXX " + byName);
+        byName.capital = "WHATEVER";
+        return byName;
+//        } catch (NotFoundException e) {
+//            return null;
+//        }
     }
 
     @GET
