@@ -54,7 +54,12 @@ ifndef::rest-client-qs[]
 +
 [source,subs="attributes+",options="nowrap"]
 ----
+ifdef::uses-jaeger[]
+$ JAEGER_REPORTER_LOG_SPANS=true JAEGER_SAMPLER_TYPE=const JAEGER_SAMPLER_PARAM=1 java -jar target/{artifactId}-bootable.jar
+endif::uses-jaeger[]
+ifndef::uses-jaeger[]
 $ java -jar target/{artifactId}-bootable.jar
+endif::uses-jaeger[]
 ----
 endif::rest-client-qs[]
 ifdef::rest-client-qs[]
